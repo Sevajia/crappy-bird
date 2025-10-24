@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://deq8lpe4xpcf8"]
+[gd_scene load_steps=27 format=3 uid="uid://deq8lpe4xpcf8"]
 
 [ext_resource type="Script" uid="uid://dsss6yqmiy2nm" path="res://scripts/worker.gd" id="1_4n0ys"]
 [ext_resource type="Texture2D" uid="uid://61mft3dskkyd" path="res://sprites/Death1.png" id="2_cmug3"]
@@ -9,8 +9,18 @@
 [ext_resource type="Texture2D" uid="uid://bhsiw4yhoku81" path="res://sprites/Death3.png" id="4_7j7r4"]
 [ext_resource type="Texture2D" uid="uid://5g3tkpsk6b4v" path="res://sprites/Face3.png" id="4_ec5k7"]
 [ext_resource type="AudioStream" uid="uid://68rktfmcvx6v" path="res://sounds/LATE late cut pow fah.wav" id="6_ec5k7"]
+[ext_resource type="Texture2D" uid="uid://cway2qlxf3idh" path="res://sprites/particles/Particle1.png" id="9_b0l5w"]
 [ext_resource type="AudioStream" uid="uid://ch3y8wcab2wcj" path="res://sounds/Point.wav" id="10_b78ny"]
+[ext_resource type="Texture2D" uid="uid://gus152n08q7y" path="res://sprites/particles/Particle2.png" id="10_t6la7"]
+[ext_resource type="Texture2D" uid="uid://wm0kqwh5jaby" path="res://sprites/particles/Particle3.png" id="11_r1ex1"]
+[ext_resource type="Texture2D" uid="uid://d1mo3j3ksceyg" path="res://sprites/particles/Particle4.png" id="12_qd6od"]
 [ext_resource type="Texture2D" uid="uid://5qtuqad6tbbn" path="res://sprites/NearMiss.png" id="12_wuga2"]
+[ext_resource type="Texture2D" uid="uid://rr5nk6vqehrj" path="res://sprites/particles/Particle5.png" id="13_tduur"]
+[ext_resource type="Texture2D" uid="uid://uydrv0tecbko" path="res://sprites/particles/Particle6.png" id="14_mp25o"]
+[ext_resource type="Texture2D" uid="uid://woow1cip0ylp" path="res://sprites/particles/Particle7.png" id="15_h0nx2"]
+[ext_resource type="Texture2D" uid="uid://ru7r4j26flwl" path="res://sprites/particles/Particle8.png" id="16_1qa05"]
+[ext_resource type="Texture2D" uid="uid://co7x20g338khc" path="res://sprites/particles/Particle9.png" id="17_8dmlh"]
+[ext_resource type="Texture2D" uid="uid://dq2qshs30i7ri" path="res://sprites/particles/Particle10.png" id="18_p4ofq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p56th"]
 animations = [{
@@ -72,17 +82,28 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwx2a"]
 radius = 4.0
 
-[sub_resource type="Gradient" id="Gradient_4n0ys"]
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_sb737"]
-frequency = 0.0217
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vwx2a"]
-width = 2
-height = 3
-noise = SubResource("FastNoiseLite_sb737")
-color_ramp = SubResource("Gradient_4n0ys")
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_01cds"]
+frames = 10
+speed_scale = 20.0
+frame_0/texture = ExtResource("9_b0l5w")
+frame_1/texture = ExtResource("10_t6la7")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("11_r1ex1")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("12_qd6od")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("13_tduur")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("14_mp25o")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("15_h0nx2")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("16_1qa05")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("17_8dmlh")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("18_p4ofq")
+frame_9/duration = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08fjk"]
 size = Vector2(10, 10.25)
@@ -94,8 +115,8 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="FaceSprites" type="AnimatedSprite2D" parent="."]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_p56th")
-animation = &"death"
 
 [node name="NearMissSprites" type="AnimatedSprite2D" parent="."]
 position = Vector2(5.999999, -7.499998)
@@ -107,9 +128,9 @@ position = Vector2(0, -1.07)
 shape = SubResource("CircleShape2D_vwx2a")
 
 [node name="WorkerParticle" type="CPUParticles2D" parent="."]
-modulate = Color(1, 1, 1, 0.39215687)
+modulate = Color(1, 1, 1, 0.19607843)
 amount = 4
-texture = SubResource("NoiseTexture2D_vwx2a")
+texture = SubResource("AnimatedTexture_01cds")
 explosiveness = 0.25
 randomness = 1.0
 emission_shape = 1
@@ -117,8 +138,8 @@ emission_sphere_radius = 6.0
 gravity = Vector2(0, 1960)
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
-scale_amount_min = 2.0
-scale_amount_max = 5.0
+scale_amount_min = 3.0
+scale_amount_max = 6.0
 script = ExtResource("3_sb737")
 
 [node name="DeathTrack" type="AudioStreamPlayer" parent="."]

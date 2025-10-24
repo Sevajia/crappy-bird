@@ -22,7 +22,7 @@ func _on_timer_timeout() -> void:
 	add_child(pipe)
 	if timer.get_wait_time() > timer_bottom:
 		timer.set_wait_time(timer.get_wait_time()-decrementer)
-	print(timer.get_wait_time())
+	#print(timer.get_wait_time())
 	
 	
 	#print("juice")

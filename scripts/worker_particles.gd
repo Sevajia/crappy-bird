@@ -8,4 +8,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	texture.noise.set_seed(randi()%10)
+	#texture.noise.set_seed(randi()%10)
+	pass

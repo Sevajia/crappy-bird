@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0k1jijwbgdi3"]
+[gd_scene load_steps=8 format=3 uid="uid://d0k1jijwbgdi3"]
 
 [ext_resource type="Script" uid="uid://bqy2sp7gug0pb" path="res://scripts/world.gd" id="1_71j4m"]
 [ext_resource type="Texture2D" uid="uid://br0icsa2ejkff" path="res://sprites/black_background.png" id="1_nnsk1"]
@@ -15,6 +15,15 @@ shadow_size = 10
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="LabelSettings" id="LabelSettings_qfnet"]
+font = ExtResource("4_k0juu")
+font_size = 128
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
 [node name="World" type="Node"]
 script = ExtResource("1_71j4m")
 
@@ -24,7 +33,6 @@ texture = ExtResource("1_nnsk1")
 centered = false
 
 [node name="Worker" parent="." instance=ExtResource("2_rwgxs")]
-z_index = 1
 position = Vector2(128, 384)
 
 [node name="PipeMachine" parent="." instance=ExtResource("3_4wyf3")]
@@ -41,4 +49,20 @@ text = "000"
 label_settings = SubResource("LabelSettings_71j4m")
 horizontal_alignment = 2
 
+[node name="Button" type="Button" parent="."]
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 132.99991
+offset_bottom = 128.0
+text = "R"
+label_settings = SubResource("LabelSettings_qfnet")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="point_gained" from="Worker" to="." method="_on_worker_point_gained"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

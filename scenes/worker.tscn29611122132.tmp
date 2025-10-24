@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://deq8lpe4xpcf8"]
+
+[ext_resource type="Script" uid="uid://dsss6yqmiy2nm" path="res://scripts/worker.gd" id="1_4n0ys"]
+[ext_resource type="Texture2D" uid="uid://c047f1xuy3xvi" path="res://sprites/Face1.png" id="2_sb737"]
+[ext_resource type="Texture2D" uid="uid://dibx8nx4nave1" path="res://sprites/Face2.png" id="3_leqb2"]
+[ext_resource type="Script" uid="uid://ca7ydo2q4rxfg" path="res://scripts/worker_particles.gd" id="3_sb737"]
+[ext_resource type="Texture2D" uid="uid://dekfor3lhiwbm" path="res://sprites/Face3.png" id="4_ec5k7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p56th"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sb737")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_leqb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ec5k7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwx2a"]
+radius = 4.0
+
+[sub_resource type="Gradient" id="Gradient_4n0ys"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sb737"]
+frequency = 0.0217
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vwx2a"]
+width = 2
+height = 3
+noise = SubResource("FastNoiseLite_sb737")
+color_ramp = SubResource("Gradient_4n0ys")
+
+[node name="Worker" type="Area2D"]
+script = ExtResource("1_4n0ys")
+
+[node name="FaceSprites" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_p56th")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_vwx2a")
+
+[node name="WorkerParticle" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.39215687)
+scale = Vector2(5, 5)
+amount = 4
+texture = SubResource("NoiseTexture2D_vwx2a")
+explosiveness = 0.25
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 6.0
+gravity = Vector2(0, 1960)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+script = ExtResource("3_sb737")

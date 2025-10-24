@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://0ytakv44vpho"]
+
+[ext_resource type="Script" uid="uid://ccxlq2nyykcpn" path="res://scripts/pipe.gd" id="1_8p0di"]
+[ext_resource type="Texture2D" uid="uid://bxep0ho7srmka" path="res://sprites/Pipe1.png" id="2_ejsh2"]
+[ext_resource type="Texture2D" uid="uid://dl227c375wbf7" path="res://sprites/Pipe2.png" id="3_4ybk5"]
+[ext_resource type="Script" uid="uid://cnlfyiy2fxhgi" path="res://scripts/point.gd" id="4_ejsh2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tdldm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ejsh2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4ybk5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ss4sx"]
+size = Vector2(80, 768)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ybk5"]
+size = Vector2(80, 180)
+
+[node name="Pipe" type="Area2D"]
+z_index = 2
+script = ExtResource("1_8p0di")
+metadata/_edit_group_ = true
+
+[node name="PipeSprites" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_tdldm")
+
+[node name="PipeTop" type="CollisionShape2D" parent="."]
+position = Vector2(0, -474)
+shape = SubResource("RectangleShape2D_ss4sx")
+
+[node name="PipeBottom" type="CollisionShape2D" parent="."]
+position = Vector2(0, 474)
+shape = SubResource("RectangleShape2D_ss4sx")
+
+[node name="Point" type="Area2D" parent="."]
+script = ExtResource("4_ejsh2")
+
+[node name="PointBox" type="CollisionShape2D" parent="Point"]
+shape = SubResource("RectangleShape2D_4ybk5")
+
+[node name="ColorRect" type="ColorRect" parent="Point"]
+visible = false
+offset_left = -45.0
+offset_top = -10.0
+offset_right = 35.0
+offset_bottom = 10.0
+color = Color(1, 0, 1, 1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(40, -10, 20, 20)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

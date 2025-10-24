@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0k1jijwbgdi3"]
+
+[ext_resource type="Script" uid="uid://bqy2sp7gug0pb" path="res://scripts/world.gd" id="1_71j4m"]
+[ext_resource type="Texture2D" uid="uid://br0icsa2ejkff" path="res://sprites/black_background.png" id="1_nnsk1"]
+[ext_resource type="PackedScene" uid="uid://deq8lpe4xpcf8" path="res://scenes/worker.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://cipqdsb14s5ud" path="res://scenes/pipe_machine.tscn" id="3_4wyf3"]
+[ext_resource type="FontFile" uid="uid://bmdsa3dkejgqk" path="res://fonts/Fairfax.ttf" id="4_k0juu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_71j4m"]
+font = ExtResource("4_k0juu")
+font_size = 64
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[node name="World" type="Node"]
+script = ExtResource("1_71j4m")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.42352942)
+texture = ExtResource("1_nnsk1")
+centered = false
+
+[node name="Worker" parent="." instance=ExtResource("2_rwgxs")]
+z_index = 1
+position = Vector2(128, 384)
+
+[node name="PipeMachine" parent="." instance=ExtResource("3_4wyf3")]
+
+[node name="Score" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -227.0
+offset_right = -7.0
+offset_bottom = 79.0
+grow_horizontal = 0
+text = "000"
+label_settings = SubResource("LabelSettings_71j4m")
+horizontal_alignment = 2
+
+[connection signal="point_gained" from="Worker" to="." method="_on_worker_point_gained"]
